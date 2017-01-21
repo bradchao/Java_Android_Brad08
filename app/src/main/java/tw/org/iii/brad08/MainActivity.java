@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void exit(View v){
+        finish();
+    }
+
     private void showResult(String mesg, boolean isRestart){
         AlertDialog alertDialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
