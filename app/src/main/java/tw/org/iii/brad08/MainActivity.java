@@ -67,11 +67,20 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle("Setup");
-        builder.setItems(new String[]{"3", "4", "5"}, new DialogInterface.OnClickListener() {
+
+        builder.setSingleChoiceItems(new String[]{"3", "4", "5"},
+                0,
+                new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 d = i+3;
                 newGame(null);
+            }
+        });
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
 
