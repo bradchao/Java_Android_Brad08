@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText input;
     private TextView hist;
     private String textAnswer, textGuess;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,30 +25,55 @@ public class MainActivity extends AppCompatActivity {
         input = (EditText)findViewById(R.id.input);
         hist = (TextView)findViewById(R.id.hist);
 
-        textAnswer = createAnswer(3);
-        Log.v("brad", textAnswer);
+        newGame(null);
     }
+
+    public void newGame(View v){
+        textAnswer = createAnswer(3);
+        count = 0;
+        input.setText("");
+        hist.setText("");
+    }
+
     public void doGuess(View v){
         textGuess = input.getText().toString();
         String result = checkAB(textAnswer, textGuess);
 
-        showResult(textGuess + " -> " + result);
-
         input.setText("");
         hist.append(textGuess + " -> " + result + "\n");
+
+        count++;
+        if (result.equals("3A0B")){
+            // WINNER
+            showResult("WINNER", true);
+
+        }else if (count == 10){
+            // Loser
+            showResult("Loser:" +textAnswer, true);
+
+        }else {
+            // Normal
+            showResult(count + "." + textGuess + " -> " + result, false);
+        }
+
     }
 
-    private void showResult(String mesg){
+    private void showResult(String mesg, boolean isRestart){
         AlertDialog alertDialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Result");
         builder.setMessage(mesg);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
-            }
-        });
+        if (isRestart) {
+            builder.setPositiveButton("restart", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    newGame(null);
+                }
+            });
+        }else{
+            builder.setPositiveButton("OK", null);
+        }
         alertDialog = builder.create();
         alertDialog.show();
     }
