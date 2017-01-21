@@ -31,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         textGuess = input.getText().toString();
         String result = checkAB(textAnswer, textGuess);
 
-        showResult(result);
+        showResult(textGuess + " -> " + result);
+
+        input.setText("");
+        hist.append(textGuess + " -> " + result + "\n");
     }
 
     private void showResult(String mesg){

@@ -64,5 +64,7 @@
         android:background="#ff0"
         android:layout_below="@id/top"
         android:layout_above="@id/funcPanel"
+        android:textSize="24sp"
+        android:textStyle="bold"
         />
 </RelativeLayout>
