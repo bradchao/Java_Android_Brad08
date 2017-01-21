@@ -1,5 +1,6 @@
 package tw.org.iii.brad08;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         hist = (TextView)findViewById(R.id.hist);
 
         textAnswer = createAnswer(3);
+        Log.v("brad", textAnswer);
     }
     public void doGuess(View v){
         textGuess = input.getText().toString();
@@ -37,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Result");
         builder.setMessage(mesg);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
         alertDialog = builder.create();
         alertDialog.show();
     }
@@ -52,7 +60,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static String checkAB(String a, String g){
-        return "1A2B";
+        int A, B; A=B=0;
+        for (int i=0; i<a.length(); i++){
+            if (a.charAt(i) == g.charAt(i)){
+                A++;
+            }else if (a.indexOf(g.charAt(i))>=0){
+                B++;
+            }
+        }
+        return A + "A" + B + "B";
     }
 
 }
