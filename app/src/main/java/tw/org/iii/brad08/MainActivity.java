@@ -13,9 +13,10 @@ import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
     private EditText input;
-    private TextView hist;
+    private TextView hist, info;
     private String textAnswer, textGuess;
     private int count;
+    private int d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,15 @@ public class MainActivity extends AppCompatActivity {
 
         input = (EditText)findViewById(R.id.input);
         hist = (TextView)findViewById(R.id.hist);
+        info = (TextView)findViewById(R.id.info);
 
+        d = 3;
         newGame(null);
     }
 
     public void newGame(View v){
-        textAnswer = createAnswer(3);
+        info.setText("目前設定為猜" + d + "碼");
+        textAnswer = createAnswer(d);
         count = 0;
         input.setText("");
         hist.setText("");
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         hist.append(textGuess + " -> " + result + "\n");
 
         count++;
-        if (result.equals("3A0B")){
+        if (result.equals(d + "A0B")){
             // WINNER
             showResult("WINNER", true);
 
@@ -66,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setItems(new String[]{"3", "4", "5"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                d = i+3;
+                newGame(null);
             }
         });
 
