@@ -26,6 +26,7 @@ public class WelcomActivity extends AppCompatActivity {
     private void gotoMain(){
         Intent it = new Intent(this, MainActivity.class);
         startActivity(it);
+        finish();
     }
 
 }

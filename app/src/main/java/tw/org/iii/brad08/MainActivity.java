@@ -58,6 +58,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setup(View v){
+        AlertDialog alertDialog = null;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Setup");
+        builder.setItems(new String[]{"3", "4", "5"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     public void exit(View v){
         finish();
     }
